@@ -96,7 +96,7 @@ class MapMaker {
             });
             this.colorPicker[key].on('change', (ev) => {
                 Layers[key].color = ev.hex;
-                if (key_layer.indexOf("background") > -1) {
+                if (key_layer.includes("background")) {
                     $("#mapid").css('background-color', ev.hex);
                     $("#mapid").removeClass("bg-clear");
                 };
@@ -116,7 +116,7 @@ class MapMaker {
             });
             // 表示変更時のイベント定義
             $(`#${key}_layer`).on('click', function () {
-                if (key_layer.indexOf("background") > -1) {
+                if (key_layer.includes("background")) {
                     $("#mapid").css('background-color', "");
                     $("#mapid").addClass("bg-clear");
                     $("#background_color").css('background-color', "");
@@ -330,13 +330,13 @@ class MapMaker {
                     Object.keys(Conf.marker.tag[key1]).forEach((key2) => {
                         let filename = Conf.marker.path + "/" + Conf.marker.tag[key1][key2];
                         filename = filename.indexOf(",") > 0 ? filename.split(",")[0] : filename;
-                        if (images.indexOf(filename) == -1) { images.push(filename) };
+                        if (!images.includes(filename)) { images.push(filename) };
                     });
                 });
                 Object.values(Conf.marker_append.files).forEach(key1 => {
                     let filename = Conf.marker_append.path + "/" + key1;
                     filename = filename.indexOf(",") > 0 ? filename.split(",")[0] : filename;
-                    if (images.indexOf(filename) == -1) { images.push(filename) };
+                    if (!images.includes(filename)) { images.push(filename) };
                 });
                 images = images.filter((x, i, self) => { return self.indexOf(x) === i });	//重複削除
                 images.sort();
